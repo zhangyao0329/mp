@@ -19,4 +19,6 @@ public interface IUserService extends IService<User> {
     List<UserVO> queryUserAddByIds(List<Long> ids);
 
     PageDTO<UserVO> queryUserpager(UserQuery query);
+
+    PageDTO<UserVO> queryUsersPage(UserQuery query);
 }

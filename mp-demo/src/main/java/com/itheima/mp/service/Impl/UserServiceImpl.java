@@ -184,4 +184,21 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         // 4. 返回结果
         return dto;
     }
+
+    @Override
+    public PageDTO<UserVO> queryUsersPage(UserQuery query) {
+        // 1.构建条件
+        Page<User> page = query.toMpPageDefaultSortByCreateTimeDesc();
+        // 2.查询
+        page(page);
+        // 3.封装返回
+        return PageDTO.of(page, user -> {
+            // 拷贝属性到VO
+            UserVO vo = BeanUtil.copyProperties(user, UserVO.class);
+            // 用户名脱敏
+            String username = vo.getUsername();
+            vo.setUsername(username.substring(0, username.length() - 2) + "**");
+            return vo;
+        });
+    }
 }

@@ -33,7 +33,11 @@ public class UserController {
 
     }
 
-
+    @ApiOperation(value ="(优化)->根据条件分页查询用户接口")
+    @GetMapping("/page2")
+    public PageDTO<UserVO> queryUsersPage2(UserQuery query){
+        return userService.queryUsersPage(query);
+    }
 
 
 
