@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/mp?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://127.0.0.1:3306/mp?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 123456
@@ -13,11 +13,15 @@ mybatis:
   mapper-locations: classpath*:mapper/*.xml
 mybatis-plus:
   type-aliases-package: com.itheima.mp.domain.po
+  mapper-locations: "classpath*:/mapper/**/*.xml" # Mapper.xml文件地址，当前这个是默认值。
   global-config:
     db-config:
       id-type: auto # 全局id类型为自增长
-  mapper-locations: "classpath*:/mapper/**/*.xml" # Mapper.xml文件地址，当前这个是默认值。
-
+      logic-delete-field: deleted # 逻辑删除字段,字段可以是任意的,Boolean类型或者Integer类型
+      logic-delete-value: 1 # 逻辑删除值
+      logic-not-delete-value: 0 # 逻辑未删除值
+  configuration:
+    default-enum-type-handler: com.baomidou.mybatisplus.core.handlers.MybatisEnumTypeHandler # 全局枚举类型处理器
 knife4j:
   enable: true
   openapi:

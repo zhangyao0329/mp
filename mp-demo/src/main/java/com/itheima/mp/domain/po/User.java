@@ -1,20 +1,23 @@
 package com.itheima.mp.domain.po;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
+import com.itheima.mp.enums.UserStatus;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
-@TableName("tb_user")
+@TableName(value = "tb_user", autoResultMap = true)
 public class User {
 
     /**
      * 用户id
      */
-    @TableId("id")
+    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     /**
@@ -38,14 +41,14 @@ public class User {
     /**
      * 详细信息
      */
-    @TableField("info")
-    private String info;
+    @TableField(value = "info",typeHandler = JacksonTypeHandler.class)
+    private UserInfo info;
 
     /**
      * 使用状态（1正常 2冻结）
      */
     @TableField("status")
-    private Integer status;
+    private UserStatus status;
 
     /**
      * 账户余额

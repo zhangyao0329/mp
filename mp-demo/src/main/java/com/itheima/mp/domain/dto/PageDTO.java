@@ -2,6 +2,8 @@ package com.itheima.mp.domain.dto;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,9 +16,13 @@ import java.util.stream.Collectors;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ApiModel(description = "分页结果")
 public class PageDTO<V> {
+    @ApiModelProperty("总记录数")
     private Long total;
+    @ApiModelProperty("总页数")
     private Long pages;
+    @ApiModelProperty("数据列表")
     private List<V> list;
 
     /**
